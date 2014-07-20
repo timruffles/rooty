@@ -1,5 +1,16 @@
 # Rooty
 
+*Warning - this isn't finished yet! Let me know if you'd like it to be.*
+
+If you're fed up with:
+
+- hand writing routes in views, and having to update them
+- parsing and serializing data to the URL
+- repeating yourself with nested views
+
+Rooty might be for you!
+
+
 ## Why
 
 Ever had to change a heap of href's in your JS app application because a route changed? Rooty gives you helpers to generate your URLs - just like Django or Rails.

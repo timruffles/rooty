@@ -1,0 +1,2 @@
+--ui exports
+-r test/setup.js

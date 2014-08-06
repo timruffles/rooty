@@ -1,0 +1,1 @@
+window.Rooty = require("./rooty");

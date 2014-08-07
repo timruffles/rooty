@@ -11,6 +11,7 @@ var defaultPaths = function() {
     });
   });
 };
+
 module.exports = {
   "beforeEach": function() {
     app = new Rooty;

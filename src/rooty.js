@@ -121,7 +121,7 @@ Route.prototype = {
       var namespaceDefaults = current.namespace._defaults;
       if(namespaceDefaults) defaults.push(namespaceDefaults);
       current = current.parent || (current.namespace.parent && { namespace: current.namespace.parent, _defaults: {} });
-    };
+    }
     var finalDefaults = defaults.reduce(function(current,next) {
       return _.defaults(current,next);
     });
@@ -135,7 +135,7 @@ Route.prototype = {
     // TODO route
     return this.routeComponentToString(this.namespace._route,params);  
   },
-  routeComponentToString: function(component,params) {
+  routeComponentToString: function(component, params) {
     switch(component.type) {
       case "route":
       case "optional":
@@ -147,16 +147,13 @@ Route.prototype = {
         } catch(e) {
           return "";
         }
-        break;
       case "literal":
         return "/" + component.value;
-        break;
       case "required":
       case "splat":
         var value = params[component.value];
-        if(value === undefined && component.type === "required") throw new Error("Missing value for required component " + name);
+        if(value === undefined && component.type === "required") throw new Error("Missing value for required component " + component.name);
         return "/" + value;
-        break;
       default:
         throw new Error("Unknown component type " + component.type);
     };
@@ -179,20 +176,17 @@ var Routing = {
     switch(component.type) {
       case "route":
         return component.children.map(this.routeComponentToRouteRegexpString).join("");
-        break;
       case "literal":
         return "/" + component.value;
-        break;
       case "required":
         return "/([^/]+)"
       case "splat":
         return "(/.*)"
       case "optional":
         return "(" + component.children.map(this.routeComponentToRouteRegexpString).join("") + ")"
-        break;
       default:
         throw new Error("Unknown component type " + component.type);
-    };
+    }
   },
   routeToLinearComponents: function(component) {
     return _.flatten(this.componentToLinearComponents(component));
@@ -210,12 +204,8 @@ var allPathComponentRe = new RegExp(allPathComponents);
 Rooty.Routing = Routing;
 Routing.Parser = Parser;
 
-exportIt(Rooty);
+module.exports = Rooty;
 
 function assert(test,msg) {
   if(!test) throw new Error(msg);
 }
-
-})(function(exports) {
-  module.exports = exports;
-});
